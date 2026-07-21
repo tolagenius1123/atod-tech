@@ -6,6 +6,7 @@ import {
 	projectPickup,
 	projectSabiwork,
 } from "@/assets";
+import { RevealGroup, RevealItem } from "@/components/shared/reveal";
 
 const projects = [
 	{
@@ -27,9 +28,12 @@ const projects = [
 
 export function ProjectShowcase() {
 	return (
-		<div className="mt-14 grid w-full max-w-300 gap-11 sm:grid-cols-2 lg:mt-20 lg:grid-cols-3">
+		<RevealGroup
+			stagger={0.12}
+			className="mt-14 grid w-full max-w-300 gap-11 sm:grid-cols-2 lg:mt-20 lg:grid-cols-3"
+		>
 			{projects.map((project) => (
-				<div key={project.name} className="relative pb-3 pl-3">
+				<RevealItem key={project.name} className="relative pb-3 pl-3">
 					<Image
 						src={project.image}
 						alt={`${project.name} — ${project.category}`}
@@ -42,8 +46,8 @@ export function ProjectShowcase() {
 					>
 						<ArrowUpRight className="size-8 text-brand" aria-hidden />
 					</a>
-				</div>
+				</RevealItem>
 			))}
-		</div>
+		</RevealGroup>
 	);
 }

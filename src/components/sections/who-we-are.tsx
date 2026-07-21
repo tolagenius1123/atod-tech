@@ -1,7 +1,9 @@
 import { Search } from "lucide-react";
 
 import { ImagePlaceholder } from "@/components/shared/image-placeholder";
+import { RevealGroup, RevealItem } from "@/components/shared/reveal";
 import { SectionBadge } from "@/components/shared/section-badge";
+import { cn } from "@/lib/utils";
 
 const paragraphs = [
 	"We're a team of designers, developers, and innovators passionate about turning ideas into impactful digital products.",
@@ -13,28 +15,36 @@ export function WhoWeAre() {
 	return (
 		<section className="relative">
 			<div className="mx-auto grid w-full max-w-360 gap-12 px-6 py-10 md:py-20 lg:grid-cols-2 lg:items-center lg:gap-8 xl:px-30">
-				<div className="flex flex-col items-start gap-6">
-					<SectionBadge icon={Search}>Who We Are?</SectionBadge>
-					{paragraphs.map((paragraph) => (
-						<p
-							key={paragraph}
-							className="max-w-164.5 text-lg leading-normal text-white first:text-xl first:leading-relaxed"
-						>
-							{paragraph}
-						</p>
+				<RevealGroup className="flex flex-col items-start gap-6">
+					<RevealItem>
+						<SectionBadge icon={Search}>Who We Are?</SectionBadge>
+					</RevealItem>
+					{paragraphs.map((paragraph, i) => (
+						<RevealItem key={paragraph}>
+							<p
+								className={cn(
+									"max-w-164.5 text-lg leading-normal text-white",
+									i === 0 && "text-xl leading-relaxed",
+								)}
+							>
+								{paragraph}
+							</p>
+						</RevealItem>
 					))}
-				</div>
+				</RevealGroup>
 
-				<div className="flex flex-col gap-4">
-					<ImagePlaceholder
-						label="Team at work"
-						className="h-61.75 w-full"
-					/>
-					<div className="grid grid-cols-2 gap-4">
+				<RevealGroup stagger={0.12} className="flex flex-col gap-4">
+					<RevealItem>
+						<ImagePlaceholder label="Team at work" className="h-61.75 w-full" />
+					</RevealItem>
+					<RevealItem className="grid grid-cols-2 gap-4">
 						<ImagePlaceholder label="Design session" className="aspect-square" />
-						<ImagePlaceholder label="Client workshop" className="aspect-square" />
-					</div>
-				</div>
+						<ImagePlaceholder
+							label="Client workshop"
+							className="aspect-square"
+						/>
+					</RevealItem>
+				</RevealGroup>
 			</div>
 		</section>
 	);

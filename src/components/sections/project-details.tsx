@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 import { phoneMockup2, phoneMockup3 } from "@/assets";
+import { RevealGroup, RevealItem } from "@/components/shared/reveal";
 
 const detailBlocks = [
 	{
@@ -38,26 +39,40 @@ export function ProjectDetails() {
 	return (
 		<section className="relative">
 			<div className="mx-auto grid w-full max-w-360 gap-12 px-6 py-10 md:py-20 lg:grid-cols-2 lg:items-start lg:gap-8 xl:px-30">
-				<div className="flex items-start justify-center gap-4 sm:gap-8">
-					<Image
-						src={phoneMockup2}
-						alt="Sabiwork app - home screen"
-						className="w-1/2 max-w-78.5"
-					/>
-					<Image
-						src={phoneMockup3}
-						alt="Sabiwork app - artisan profile screen"
-						className="mt-12 w-1/2 max-w-78.5"
-					/>
-				</div>
+				<RevealGroup
+					stagger={0.12}
+					className="flex items-start justify-center gap-4 sm:gap-8"
+				>
+					<RevealItem className="w-1/2 max-w-78.5">
+						<Image
+							src={phoneMockup2}
+							alt="Sabiwork app - home screen"
+							className="w-full"
+						/>
+					</RevealItem>
+					<RevealItem className="mt-12 w-1/2 max-w-78.5">
+						<Image
+							src={phoneMockup3}
+							alt="Sabiwork app - artisan profile screen"
+							className="w-full"
+						/>
+					</RevealItem>
+				</RevealGroup>
 
-				<div className="relative flex flex-col gap-14.5 pl-5">
+				<RevealGroup
+					stagger={0.12}
+					amount={0.1}
+					className="relative flex flex-col gap-14.5 pl-5"
+				>
 					<span
 						aria-hidden
 						className="absolute inset-y-0 left-0 top-4.5 w-px bg-brand-accent"
 					/>
 					{detailBlocks.map((block) => (
-						<div key={block.title} className="relative flex flex-col gap-3.75">
+						<RevealItem
+							key={block.title}
+							className="relative flex flex-col gap-3.75"
+						>
 							<span
 								aria-hidden
 								className="absolute -left-5 top-3.5 size-2.25 -translate-x-1/2 -translate-y-1/2 rounded-full border border-brand-accent bg-page"
@@ -82,9 +97,9 @@ export function ProjectDetails() {
 									))}
 								</ul>
 							)}
-						</div>
+						</RevealItem>
 					))}
-				</div>
+				</RevealGroup>
 			</div>
 		</section>
 	);

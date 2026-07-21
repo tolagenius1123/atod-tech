@@ -2,6 +2,7 @@ import Image from "next/image";
 
 import { checkCircle, designApproachImg } from "@/assets";
 import { OrnamentHeading } from "@/components/shared/ornament-heading";
+import { RevealGroup, RevealItem } from "@/components/shared/reveal";
 
 const principles = [
 	"Intuitive navigation for both artisans and customers.",
@@ -13,8 +14,11 @@ const principles = [
 export function DesignApproach() {
 	return (
 		<section className="relative">
-			<div className="mx-auto grid w-full max-w-360 gap-12 px-6 py-10 md:py-20 lg:grid-cols-[507fr_573fr] lg:items-center lg:gap-30 xl:px-30">
-				<div className="flex flex-col items-start">
+			<RevealGroup
+				stagger={0.12}
+				className="mx-auto grid w-full max-w-360 gap-12 px-6 py-10 md:py-20 lg:grid-cols-[507fr_573fr] lg:items-center lg:gap-30 xl:px-30"
+			>
+				<RevealItem direction="right" className="flex flex-col items-start">
 					<OrnamentHeading>Design Approach</OrnamentHeading>
 					<p className="mt-4.25 text-lg leading-normal text-white">
 						Our product designs focused on simplicity and trust
@@ -34,14 +38,16 @@ export function DesignApproach() {
 							</li>
 						))}
 					</ul>
-				</div>
+				</RevealItem>
 
-				<Image
-					src={designApproachImg}
-					alt="A Sabiwork user booking an artisan from their phone"
-					className="w-full"
-				/>
-			</div>
+				<RevealItem direction="left">
+					<Image
+						src={designApproachImg}
+						alt="A Sabiwork user booking an artisan from their phone"
+						className="w-full"
+					/>
+				</RevealItem>
+			</RevealGroup>
 		</section>
 	);
 }

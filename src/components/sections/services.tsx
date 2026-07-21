@@ -2,6 +2,7 @@ import Image from "next/image";
 import { UserRoundSearch } from "lucide-react";
 
 import { glowEllipse, gridCard, sparkleSquare } from "@/assets";
+import { RevealGroup, RevealItem } from "@/components/shared/reveal";
 import { SectionBadge } from "@/components/shared/section-badge";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { cn } from "@/lib/utils";
@@ -103,21 +104,30 @@ export function Services() {
 			/>
 
 			<div className="relative mx-auto w-full max-w-[1440px] px-6 pb-16 md:pb-20 pt-10 md:pt-20 xl:px-[120px]">
-				<div className="flex max-w-[873px] flex-col items-start gap-6">
-					<SectionBadge icon={UserRoundSearch}>What We Do</SectionBadge>
-					<SectionHeading>
-						From strategy to design and development, we help you create digital
-						products that scale.
-					</SectionHeading>
-				</div>
+				<RevealGroup className="flex max-w-[873px] flex-col items-start gap-6">
+					<RevealItem>
+						<SectionBadge icon={UserRoundSearch}>What We Do</SectionBadge>
+					</RevealItem>
+					<RevealItem>
+						<SectionHeading>
+							From strategy to design and development, we help you create
+							digital products that scale.
+						</SectionHeading>
+					</RevealItem>
+				</RevealGroup>
 
-				<div className="mt-10 grid items-start gap-4 md:grid-cols-2 lg:grid-cols-3">
-					<ServiceCard
-						title="Website Design & Development"
-						description="Fast, responsive, and user-focused."
-						squares={{ left: "blue", right: "orange", top: "orange" }}
-					/>
-					<div className="grid gap-4">
+				<RevealGroup
+					stagger={0.12}
+					className="mt-10 grid items-start gap-4 md:grid-cols-2 lg:grid-cols-3"
+				>
+					<RevealItem>
+						<ServiceCard
+							title="Website Design & Development"
+							description="Fast, responsive, and user-focused."
+							squares={{ left: "blue", right: "orange", top: "orange" }}
+						/>
+					</RevealItem>
+					<RevealItem className="grid gap-4">
 						<GhostCard
 							title="Mobile Apps"
 							description="iOS & Android apps built for performance."
@@ -127,13 +137,15 @@ export function Services() {
 							description="Seamless, intuitive, and delightful user experiences."
 							squares={{ left: "orange", right: "orange", top: "blue" }}
 						/>
-					</div>
-					<ServiceCard
-						title="Customer Software Solution"
-						description="Tailored system for business needs."
-						squares={{ left: "orange", right: "blue", top: "orange" }}
-					/>
-				</div>
+					</RevealItem>
+					<RevealItem>
+						<ServiceCard
+							title="Customer Software Solution"
+							description="Tailored system for business needs."
+							squares={{ left: "orange", right: "blue", top: "orange" }}
+						/>
+					</RevealItem>
+				</RevealGroup>
 			</div>
 		</section>
 	);

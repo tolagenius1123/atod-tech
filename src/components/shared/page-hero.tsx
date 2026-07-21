@@ -1,5 +1,6 @@
 import { FancyButton } from "@/components/shared/fancy-button";
 import { HeroBackdrop } from "@/components/shared/hero-backdrop";
+import { RevealGroup, RevealItem } from "@/components/shared/reveal";
 import { cn } from "@/lib/utils";
 
 type PageHeroProps = {
@@ -21,25 +22,33 @@ export function PageHero({
 		<section className="relative overflow-hidden bg-page">
 			<HeroBackdrop priority />
 
-			<div
+			<RevealGroup
+				trigger="mount"
+				stagger={0.12}
 				className={cn(
 					"relative mx-auto flex w-full max-w-360 flex-col items-center px-6 pb-12 pt-33 md:pb-20 xl:px-30",
 					contentClassName,
 				)}
 			>
-				<h1 className="heading-gradient max-w-290.5 text-center text-[40px] font-medium leading-tight tracking-[-1.44px] sm:text-[56px] lg:text-[72px] lg:leading-22.25">
-					{title}
-				</h1>
-				<p className="mt-6 max-w-161.25 text-center text-lg leading-7.5 text-white lg:text-xl">
-					{description}
-				</p>
+				<RevealItem>
+					<h1 className="heading-gradient max-w-290.5 text-center text-[40px] font-medium leading-tight tracking-[-1.44px] sm:text-[56px] lg:text-[72px] lg:leading-22.25">
+						{title}
+					</h1>
+				</RevealItem>
+				<RevealItem>
+					<p className="mt-6 max-w-161.25 text-center text-lg leading-7.5 text-white lg:text-xl">
+						{description}
+					</p>
+				</RevealItem>
 				{action && (
-					<FancyButton href={action.href} className="mt-7">
-						{action.label}
-					</FancyButton>
+					<RevealItem>
+						<FancyButton href={action.href} className="mt-7">
+							{action.label}
+						</FancyButton>
+					</RevealItem>
 				)}
 				{children}
-			</div>
+			</RevealGroup>
 		</section>
 	);
 }

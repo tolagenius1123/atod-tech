@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Network } from "lucide-react";
 
 import { gridBlue, timeline } from "@/assets";
+import { Reveal, RevealGroup, RevealItem } from "@/components/shared/reveal";
 import { SectionBadge } from "@/components/shared/section-badge";
 import { SectionHeading } from "@/components/shared/section-heading";
 
@@ -36,47 +37,62 @@ export function WhyChooseUs() {
 			/>
 
 			<div className="relative mx-auto w-full max-w-[1440px] px-6 py-10 md:py-20 xl:px-[121px]">
-				<div className="mx-auto flex max-w-[694px] flex-col items-center gap-6 text-center">
-					<SectionBadge icon={Network}>Why Choose Us</SectionBadge>
-					<SectionHeading>
-						We Build Solutions That Moves Business Forward
-					</SectionHeading>
-				</div>
+				<RevealGroup className="mx-auto flex max-w-[694px] flex-col items-center gap-6 text-center">
+					<RevealItem>
+						<SectionBadge icon={Network}>Why Choose Us</SectionBadge>
+					</RevealItem>
+					<RevealItem>
+						<SectionHeading>
+							We Build Solutions That Moves Business Forward
+						</SectionHeading>
+					</RevealItem>
+				</RevealGroup>
 
 				{/* Desktop: dotted timeline with texts at exact design offsets, centered on the viewport */}
 				<div className="relative left-1/2 mt-16 hidden h-[200px] w-[1198px] -translate-x-1/2 min-[1200px]:block">
-					<Image
-						src={timeline}
-						alt=""
-						aria-hidden
-						className="absolute left-[51px] top-[24px] w-[1096px] max-w-none"
-					/>
-					<div className="absolute left-[36px] top-[105px] h-[60px] w-[1127px]">
+					<Reveal className="absolute left-[51px] top-[24px]" direction="none">
+						<Image
+							src={timeline}
+							alt=""
+							aria-hidden
+							className="w-[1096px] max-w-none"
+						/>
+					</Reveal>
+					<RevealGroup
+						stagger={0.12}
+						delay={0.2}
+						className="absolute left-[36px] top-[105px] h-[60px] w-[1127px]"
+					>
 						{reasons.map((reason, i) => (
-							<p
+							<RevealItem
 								key={reason}
-								className={`absolute top-0 text-xl leading-[30px] tracking-[-0.4px] text-white ${reasonPositions[i]}`}
+								distance={16}
+								className={`absolute top-0 ${reasonPositions[i]}`}
 							>
-								{reason}
-							</p>
+								<p className="text-xl leading-[30px] tracking-[-0.4px] text-white">
+									{reason}
+								</p>
+							</RevealItem>
 						))}
-					</div>
+					</RevealGroup>
 				</div>
 
 				{/* Mobile / tablet: simple bulleted stack */}
-				<ul className="mx-auto mt-10 flex max-w-[480px] flex-col gap-6 min-[1200px]:hidden">
-					{reasons.map((reason) => (
-						<li key={reason} className="flex items-start gap-4">
-							<span
-								aria-hidden
-								className="mt-2.5 size-2 shrink-0 rounded-full bg-white"
-							/>
-							<p className="text-lg leading-[30px] tracking-[-0.4px] text-white">
-								{reason}
-							</p>
-						</li>
-					))}
-				</ul>
+				<Reveal className="min-[1200px]:hidden">
+					<ul className="mx-auto mt-10 flex max-w-[480px] flex-col gap-6">
+						{reasons.map((reason) => (
+							<li key={reason} className="flex items-start gap-4">
+								<span
+									aria-hidden
+									className="mt-2.5 size-2 shrink-0 rounded-full bg-white"
+								/>
+								<p className="text-lg leading-[30px] tracking-[-0.4px] text-white">
+									{reason}
+								</p>
+							</li>
+						))}
+					</ul>
+				</Reveal>
 			</div>
 		</section>
 	);

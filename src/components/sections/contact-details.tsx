@@ -8,6 +8,7 @@ import {
 	socialTwitter,
 	socialYoutube,
 } from "@/assets";
+import { RevealGroup, RevealItem } from "@/components/shared/reveal";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -74,8 +75,12 @@ function ContactMethod({
 
 export function ContactDetails() {
 	return (
-		<div className="mt-14 flex w-full max-w-[893px] flex-col gap-10 lg:mt-20 lg:flex-row lg:items-center lg:gap-16">
-			<div className="flex flex-col">
+		<RevealGroup
+			stagger={0.15}
+			amount={0.1}
+			className="mt-14 flex w-full max-w-[893px] flex-col gap-10 lg:mt-20 lg:flex-row lg:items-center lg:gap-16"
+		>
+			<RevealItem direction="right" className="flex flex-col">
 				<h2 className="text-lg font-semibold leading-tight text-white">
 					Want to reach out directly?
 				</h2>
@@ -114,47 +119,49 @@ export function ContactDetails() {
 						</a>
 					))}
 				</div>
-			</div>
+			</RevealItem>
 
-			<form className="flex w-full max-w-[523px] flex-col gap-6 rounded-xl border border-white/10 bg-linear-to-b from-white/7 to-white/2 p-8 backdrop-blur-sm">
-				<div className="grid gap-6 sm:grid-cols-2">
-					{formFields.map((field) => (
-						<div key={field.id} className="flex flex-col gap-2">
-							<Label htmlFor={field.id} className="text-sm text-white">
-								{field.label}
-							</Label>
-							<Input
-								id={field.id}
-								name={field.id}
-								type={field.type}
-								placeholder={field.placeholder}
-								className="h-11.5 rounded-lg border-white/15 bg-white/5 text-white placeholder:text-white/40"
-							/>
-						</div>
-					))}
-				</div>
+			<RevealItem direction="left" className="w-full max-w-[523px]">
+				<form className="flex w-full flex-col gap-6 rounded-xl border border-white/10 bg-linear-to-b from-white/7 to-white/2 p-8 backdrop-blur-sm">
+					<div className="grid gap-6 sm:grid-cols-2">
+						{formFields.map((field) => (
+							<div key={field.id} className="flex flex-col gap-2">
+								<Label htmlFor={field.id} className="text-sm text-white">
+									{field.label}
+								</Label>
+								<Input
+									id={field.id}
+									name={field.id}
+									type={field.type}
+									placeholder={field.placeholder}
+									className="h-11.5 rounded-lg border-white/15 bg-white/5 text-white placeholder:text-white/40"
+								/>
+							</div>
+						))}
+					</div>
 
-				<div className="flex flex-col gap-2">
-					<Label htmlFor="message" className="text-sm text-white">
-						Message
-					</Label>
-					<Textarea
-						id="message"
-						name="message"
-						rows={4}
-						placeholder="Type your message here.."
-						className="min-h-23 rounded-lg border-white/15 bg-white/5 text-white placeholder:text-white/40"
-					/>
-				</div>
+					<div className="flex flex-col gap-2">
+						<Label htmlFor="message" className="text-sm text-white">
+							Message
+						</Label>
+						<Textarea
+							id="message"
+							name="message"
+							rows={4}
+							placeholder="Type your message here.."
+							className="min-h-23 rounded-lg border-white/15 bg-white/5 text-white placeholder:text-white/40"
+						/>
+					</div>
 
-				<Button
-					type="submit"
-					className="fancy-gradient fancy-shadow h-10 w-fit cursor-pointer gap-2 rounded-[50px] border border-white px-8 text-sm font-normal tracking-[0.56px] text-white transition-[filter] hover:brightness-125"
-				>
-					Send Message
-					<ArrowRight className="size-3" aria-hidden />
-				</Button>
-			</form>
-		</div>
+					<Button
+						type="submit"
+						className="fancy-gradient fancy-shadow h-10 w-fit cursor-pointer gap-2 rounded-[50px] border border-white px-8 text-sm font-normal tracking-[0.56px] text-white transition-[filter] hover:brightness-125"
+					>
+						Send Message
+						<ArrowRight className="size-3" aria-hidden />
+					</Button>
+				</form>
+			</RevealItem>
+		</RevealGroup>
 	);
 }

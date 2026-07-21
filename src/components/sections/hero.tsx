@@ -16,6 +16,7 @@ import {
 } from "@/assets";
 import { FancyButton } from "@/components/shared/fancy-button";
 import { HeroBackdrop } from "@/components/shared/hero-backdrop";
+import { RevealGroup, RevealItem } from "@/components/shared/reveal";
 import { cn } from "@/lib/utils";
 
 const trustedLogos = [
@@ -116,33 +117,46 @@ export function Hero() {
 		<section id="home" className="relative overflow-hidden bg-page">
 			<HeroBackdrop priority />
 
-			<div className="relative mx-auto flex w-full max-w-360 flex-col items-center px-6 pb-10 md:pb-20 pt-33 xl:px-30">
-				<a
-					href="#projects"
-					className="fancy-shadow flex cursor-pointer flex-wrap items-center justify-center gap-y-1 rounded-[50px] py-1 pl-2 pr-4 transition-[filter] hover:brightness-125"
-				>
-					<span className="fancy-gradient rounded-[50px] border border-white px-3.5 py-0.5 text-sm leading-5 tracking-[0.56px] text-badge-text">
-						New Projects
-					</span>
-					<span className="px-2 text-sm leading-5 tracking-[0.56px] text-white">
-						Check out our new products
-					</span>
-					<ArrowRight className="size-4 text-white" aria-hidden />
-				</a>
+			<RevealGroup
+				trigger="mount"
+				stagger={0.12}
+				className="relative mx-auto flex w-full max-w-360 flex-col items-center px-6 pb-10 md:pb-20 pt-33 xl:px-30"
+			>
+				<RevealItem>
+					<a
+						href="#projects"
+						className="fancy-shadow flex cursor-pointer flex-wrap items-center justify-center gap-y-1 rounded-[50px] py-1 pl-2 pr-4 transition-[filter] hover:brightness-125"
+					>
+						<span className="fancy-gradient rounded-[50px] border border-white px-3.5 py-0.5 text-sm leading-5 tracking-[0.56px] text-badge-text">
+							New Projects
+						</span>
+						<span className="px-2 text-sm leading-5 tracking-[0.56px] text-white">
+							Check out our new products
+						</span>
+						<ArrowRight className="size-4 text-white" aria-hidden />
+					</a>
+				</RevealItem>
 
-				<h1 className="heading-gradient mt-6.75 max-w-290.5 text-center text-[40px] font-medium leading-tight tracking-[-1.44px] sm:text-[56px] lg:text-[72px] lg:leading-22.25">
-					Building Digital Products That Drives Growth
-				</h1>
-				<p className="mt-4 max-w-161.25 text-center text-lg leading-7.5 text-white lg:text-xl">
-					We design and develop websites, mobile apps, and custom software that
-					bring your ideas to life.
-				</p>
+				<RevealItem>
+					<h1 className="heading-gradient mt-6.75 max-w-290.5 text-center text-[40px] font-medium leading-tight tracking-[-1.44px] sm:text-[56px] lg:text-[72px] lg:leading-22.25">
+						Building Digital Products That Drives Growth
+					</h1>
+				</RevealItem>
 
-				<FancyButton href="#contact" className="mt-6.75">
-					Contact Us
-				</FancyButton>
+				<RevealItem>
+					<p className="mt-4 max-w-161.25 text-center text-lg leading-7.5 text-white lg:text-xl">
+						We design and develop websites, mobile apps, and custom software
+						that bring your ideas to life.
+					</p>
+				</RevealItem>
 
-				<div className="mt-10 flex flex-col items-center gap-4">
+				<RevealItem>
+					<FancyButton href="#contact" className="mt-6.75">
+						Contact Us
+					</FancyButton>
+				</RevealItem>
+
+				<RevealItem className="mt-10 flex flex-col items-center gap-4">
 					<p className="text-center text-sm leading-5 tracking-[0.56px] text-[#eaeaea] sm:bg-linear-to-b sm:from-[#eaeaea] sm:to-[#eaeaea]/0 sm:bg-clip-text sm:text-transparent">
 						Trusted by startups, enterprises, and innovators worldwide.
 					</p>
@@ -157,9 +171,14 @@ export function Hero() {
 							/>
 						))}
 					</div>
-				</div>
+				</RevealItem>
 
-				<div className="relative mt-6 hidden h-43.25 w-294.5 min-[1200px]:block">
+				<RevealGroup
+					trigger="mount"
+					delay={0.7}
+					stagger={0.08}
+					className="relative mt-6 hidden h-43.25 w-294.5 min-[1200px]:block"
+				>
 					<Image
 						src={flowCurveLeft}
 						alt=""
@@ -173,19 +192,22 @@ export function Hero() {
 						className="absolute left-222.25 top-5.75 h-31.75 w-31.5 -scale-x-100"
 					/>
 					{flowSteps.map((step) => (
-						<FlowChip
+						<RevealItem
 							key={step.label}
-							icon={step.icon}
-							label={step.label}
+							distance={12}
 							className={cn("absolute", step.className)}
-						/>
+						>
+							<FlowChip icon={step.icon} label={step.label} />
+						</RevealItem>
 					))}
 					{flowMilestones.map((m) => (
-						<FlowMilestone
+						<RevealItem
 							key={m.label}
-							label={m.label}
+							distance={12}
 							className={cn("absolute", m.className)}
-						/>
+						>
+							<FlowMilestone label={m.label} />
+						</RevealItem>
 					))}
 					<Image
 						src={flowConnector}
@@ -199,17 +221,17 @@ export function Hero() {
 						aria-hidden
 						className="absolute left-169.75 top-38 w-7.75"
 					/>
-				</div>
+				</RevealGroup>
 
-				<div className="mt-8 flex flex-wrap items-center justify-center gap-2 min-[1200px]:hidden">
+				<RevealItem className="mt-8 flex flex-wrap items-center justify-center gap-2 min-[1200px]:hidden">
 					{flowSteps.map((step) => (
 						<FlowChip key={step.label} icon={step.icon} label={step.label} />
 					))}
 					{flowMilestones.map((m) => (
 						<FlowMilestone key={m.label} label={m.label} />
 					))}
-				</div>
-			</div>
+				</RevealItem>
+			</RevealGroup>
 		</section>
 	);
 }

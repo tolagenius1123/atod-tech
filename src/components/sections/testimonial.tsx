@@ -2,6 +2,7 @@ import Image from "next/image";
 import { UserRoundSearch } from "lucide-react";
 
 import { avatarLawal, dots, glowEllipse, quote } from "@/assets";
+import { Reveal, RevealGroup, RevealItem } from "@/components/shared/reveal";
 import { SectionBadge } from "@/components/shared/section-badge";
 import { SectionHeading } from "@/components/shared/section-heading";
 
@@ -16,12 +17,16 @@ export function Testimonial() {
 			/>
 
 			<div className="relative mx-auto w-full max-w-[1440px] px-6 pb-32 pt-10 md:pt-20 xl:px-[120px]">
-				<div className="flex max-w-[873px] flex-col items-start gap-6">
-					<SectionBadge icon={UserRoundSearch}>Testimonial</SectionBadge>
-					<SectionHeading>What Client Says About Us</SectionHeading>
-				</div>
+				<RevealGroup className="flex max-w-[873px] flex-col items-start gap-6">
+					<RevealItem>
+						<SectionBadge icon={UserRoundSearch}>Testimonial</SectionBadge>
+					</RevealItem>
+					<RevealItem>
+						<SectionHeading>What Client Says About Us</SectionHeading>
+					</RevealItem>
+				</RevealGroup>
 
-				<div className="relative mt-9">
+				<Reveal className="relative mt-9" amount={0.15}>
 					<div className="relative min-h-[445px] overflow-hidden rounded-[18px] bg-white/[0.03]">
 						<Image
 							src={dots}
@@ -88,7 +93,7 @@ export function Testimonial() {
 						aria-hidden
 						className="absolute -bottom-[96px] right-3 hidden w-[235px] lg:block"
 					/>
-				</div>
+				</Reveal>
 			</div>
 		</section>
 	);
