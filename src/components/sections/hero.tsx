@@ -9,14 +9,13 @@ import {
 	flowDevelop,
 	flowDiscover,
 	flowStrategy,
-	heroBg,
 	logoBoltshift,
 	logoFeatherDev,
 	logoGlobalBank,
 	logoLightbox,
-	sparklePlus,
 } from "@/assets";
 import { FancyButton } from "@/components/shared/fancy-button";
+import { HeroBackdrop } from "@/components/shared/hero-backdrop";
 import { cn } from "@/lib/utils";
 
 const trustedLogos = [
@@ -59,15 +58,6 @@ const flowSteps: FlowStep[] = [
 const flowMilestones = [
 	{ label: "Goals", className: "left-45.75 top-17.5" },
 	{ label: "Launch Product", className: "left-222.25 top-17.5" },
-];
-
-const sparklePositions = [
-	"left-[87.5%] top-[42%]",
-	"left-[82.6%] top-[58%]",
-	"left-[81.8%] top-[16%]",
-	"left-[8%] top-[32%]",
-	"left-[24.5%] top-[16%]",
-	"left-[13.3%] top-[42%]",
 ];
 
 function FlowChipIcon({ icon }: { icon: FlowStep["icon"] }) {
@@ -124,23 +114,7 @@ function FlowMilestone({
 export function Hero() {
 	return (
 		<section id="home" className="relative overflow-hidden bg-page">
-			<Image
-				src={heroBg}
-				alt=""
-				aria-hidden
-				priority
-				className="pointer-events-none absolute inset-0 size-full object-cover"
-			/>
-
-			{sparklePositions.map((pos) => (
-				<Image
-					key={pos}
-					src={sparklePlus}
-					alt=""
-					aria-hidden
-					className={cn("absolute hidden size-6 md:block", pos)}
-				/>
-			))}
+			<HeroBackdrop priority />
 
 			<div className="relative mx-auto flex w-full max-w-360 flex-col items-center px-6 pb-10 md:pb-20 pt-33 xl:px-30">
 				<a

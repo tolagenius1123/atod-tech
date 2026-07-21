@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Menu } from "lucide-react";
 
 import { FancyButton } from "@/components/shared/fancy-button";
@@ -15,13 +16,15 @@ import {
 import { cn } from "@/lib/utils";
 
 const navLinks = [
-	{ label: "Home", href: "/", active: true },
-	{ label: "Projects", href: "#projects", active: false },
-	{ label: "About Us", href: "#", active: false },
-	{ label: "Contact Us", href: "#contact", active: false },
+	{ label: "Home", href: "/" },
+	{ label: "Projects", href: "/projects" },
+	{ label: "About Us", href: "" },
+	{ label: "Contact Us", href: "" },
 ];
 
 export function Header() {
+	const pathname = usePathname();
+
 	return (
 		<header className="absolute inset-x-0 top-0 z-30">
 			<div className="mx-auto flex h-20 w-full max-w-360 items-center justify-between px-6 xl:px-30">
@@ -38,7 +41,7 @@ export function Header() {
 								href={link.href}
 								className={cn(
 									"cursor-pointer text-base leading-6 transition-colors hover:text-white",
-									link.active ? "text-brand" : "text-nav-muted",
+									pathname === link.href ? "text-brand" : "text-nav-muted",
 								)}
 							>
 								{link.label}
@@ -48,7 +51,7 @@ export function Header() {
 				</div>
 
 				<div className="hidden lg:block">
-					<FancyButton href="#contact">Contact Us</FancyButton>
+					<FancyButton href="/contact">Contact Us</FancyButton>
 				</div>
 
 				{/* Mobile Menu */}
@@ -79,13 +82,15 @@ export function Header() {
 									href={link.href}
 									className={cn(
 										"cursor-pointer text-base leading-6 transition-colors hover:text-white",
-										link.active ? "text-brand-accent" : "text-nav-muted",
+										pathname === link.href
+											? "text-brand-accent"
+											: "text-nav-muted",
 									)}
 								>
 									{link.label}
 								</Link>
 							))}
-							<FancyButton href="#contact" className="self-start">
+							<FancyButton href="/contact" className="self-start">
 								Contact Us
 							</FancyButton>
 						</nav>

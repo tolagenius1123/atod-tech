@@ -12,26 +12,32 @@ import {
 const footerColumns = [
 	{
 		heading: "Links",
-		links: ["Home", "Projects", "About Us", "Contact", "Privacy policy"],
+		links: [
+			{ label: "Home", href: "/" },
+			{ label: "Projects", href: "/projects" },
+			{ label: "About Us", href: "/about" },
+			{ label: "Contact", href: "/contact" },
+			{ label: "Privacy policy", href: "#" },
+		],
 	},
 	{
 		heading: "Services",
 		links: [
-			"Web design",
-			"Web development",
-			"Mobile design",
-			"UI/UX design",
-			"Branding design",
+			{ label: "Web design", href: "#" },
+			{ label: "Web development", href: "#" },
+			{ label: "Mobile design", href: "#" },
+			{ label: "UI/UX design", href: "#" },
+			{ label: "Branding design", href: "#" },
 		],
 	},
 	{
 		heading: "Contact us",
 		links: [
-			"Information",
-			"Request a quote",
-			"Consultation",
-			"Help center",
-			"Terms and conditions",
+			{ label: "Information", href: "/contact" },
+			{ label: "Request a quote", href: "/contact" },
+			{ label: "Consultation", href: "/contact" },
+			{ label: "Help center", href: "#" },
+			{ label: "Terms and conditions", href: "#" },
 		],
 	},
 ];
@@ -47,15 +53,15 @@ const socialIcons = [
 export function Footer() {
 	return (
 		<footer>
-			<div className="mx-auto w-full max-w-[1440px] px-6 pt-12 xl:px-[120px]">
+			<div className="mx-auto w-full max-w-360 px-6 pt-12 xl:px-30">
 				<div className="flex flex-col gap-12 lg:flex-row lg:items-start lg:justify-between lg:gap-8">
 					<div className="flex flex-col items-start">
 						<Link
 							href="/"
 							aria-label="ATOD Tech Agency - Home"
-							className="block h-8 w-[124px] cursor-pointer bg-transparent"
+							className="block h-8 w-31 cursor-pointer bg-transparent"
 						/>
-						<p className="mt-6 max-w-[323px] text-base leading-6 text-white">
+						<p className="mt-6 max-w-80.75 text-base leading-6 text-white">
 							We design and build digital products that empower businesses to
 							grow.
 						</p>
@@ -79,14 +85,14 @@ export function Footer() {
 								{column.heading}
 							</h3>
 							<ul className="flex flex-col gap-6">
-								{column.links.map((label) => (
-									<li key={label}>
-										<a
-											href="#"
+								{column.links.map((link) => (
+									<li key={link.label}>
+										<Link
+											href={link.href}
 											className="cursor-pointer text-base leading-[22px] text-white transition-colors hover:text-brand-accent"
 										>
-											{label}
-										</a>
+											{link.label}
+										</Link>
 									</li>
 								))}
 							</ul>
@@ -94,7 +100,7 @@ export function Footer() {
 					))}
 				</div>
 
-				<div className="mt-12 flex h-[60px] items-center justify-center border-t border-[#e1e4ed]/40 py-6">
+				<div className="mt-12 flex h-15 items-center justify-center border-t border-[#e1e4ed]/40 py-6">
 					<p className="text-center text-sm leading-[22px] text-white/90 lg:text-base">
 						Copyright &copy; 2025 ATOD Tech Agency{" "}
 						<span className="text-[#d3d7e5]">|</span> All Rights Reserved{" "}
