@@ -1,6 +1,7 @@
+import Image from "next/image";
 import { Search } from "lucide-react";
 
-import { ImagePlaceholder } from "@/components/shared/image-placeholder";
+import { aboutTeamGroup, aboutTeamLaptop, aboutTeamTablet } from "@/assets";
 import { RevealGroup, RevealItem } from "@/components/shared/reveal";
 import { SectionBadge } from "@/components/shared/section-badge";
 import { cn } from "@/lib/utils";
@@ -35,14 +36,32 @@ export function WhoWeAre() {
 
 				<RevealGroup stagger={0.12} className="flex flex-col gap-4">
 					<RevealItem>
-						<ImagePlaceholder label="Team at work" className="h-61.75 w-full" />
+						<div className="relative h-61.75 w-full overflow-hidden rounded-xl">
+							<Image
+								src={aboutTeamGroup}
+								alt="The Atod team gathered around a tablet"
+								fill
+								className="object-cover"
+							/>
+						</div>
 					</RevealItem>
 					<RevealItem className="grid grid-cols-2 gap-4">
-						<ImagePlaceholder label="Design session" className="aspect-square" />
-						<ImagePlaceholder
-							label="Client workshop"
-							className="aspect-square"
-						/>
+						<div className="relative aspect-square overflow-hidden rounded-xl">
+							<Image
+								src={aboutTeamTablet}
+								alt="A designer reviewing work on a tablet"
+								fill
+								className="object-cover"
+							/>
+						</div>
+						<div className="relative aspect-square overflow-hidden rounded-xl">
+							<Image
+								src={aboutTeamLaptop}
+								alt="A developer working on a laptop"
+								fill
+								className="object-cover"
+							/>
+						</div>
 					</RevealItem>
 				</RevealGroup>
 			</div>

@@ -1,9 +1,8 @@
 import Image from "next/image";
 import { Search } from "lucide-react";
 
-import { glowEllipse } from "@/assets";
-import { ImagePlaceholder } from "@/components/shared/image-placeholder";
-import { RevealGroup, RevealItem } from "@/components/shared/reveal";
+import { glowEllipse, missionPointing, missionRing } from "@/assets";
+import { Reveal, RevealGroup, RevealItem } from "@/components/shared/reveal";
 import { SectionBadge } from "@/components/shared/section-badge";
 
 export function OurMission() {
@@ -29,24 +28,38 @@ export function OurMission() {
 					</RevealItem>
 				</RevealGroup>
 
-				<RevealGroup
-					stagger={0.12}
-					className="mt-16 grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-16"
-				>
-					<RevealItem direction="right">
-						<p className="max-w-133.25 text-lg leading-normal text-white">
-							We don&rsquo;t just build software we build lasting partnerships.
-							Whether you&rsquo;re a startup or an established brand,
-							we&rsquo;re here to help you grow, one digital product at a time.
-						</p>
-					</RevealItem>
-					<RevealItem direction="left">
-						<ImagePlaceholder
-							label="Atod team collaborating"
-							className="h-125.75 w-full"
+				<Reveal direction="up" className="mt-16">
+					<div className="relative overflow-hidden rounded-3xl bg-white">
+						<Image
+							src={missionRing}
+							alt=""
+							aria-hidden
+							className="pointer-events-none absolute right-0 top-1/2 hidden w-36 -translate-y-1/2 lg:block"
 						/>
-					</RevealItem>
-				</RevealGroup>
+						<div className="grid items-end gap-8 lg:grid-cols-2">
+							<div className="flex flex-col gap-8 p-8 lg:p-12">
+								<div
+									role="img"
+									aria-label="Atod logo"
+									className="h-20 w-35 rounded-lg bg-neutral-300"
+								/>
+								<p className="max-w-100 text-lg leading-normal text-brand">
+									We don&rsquo;t just build software we build lasting
+									partnerships. Whether you&rsquo;re a startup or an established
+									brand, we&rsquo;re here to help you grow, one digital product
+									at a time.
+								</p>
+							</div>
+							<div className="relative flex items-end justify-end">
+								<Image
+									src={missionPointing}
+									alt="A smiling man pointing toward the viewer"
+									className="w-full max-w-140"
+								/>
+							</div>
+						</div>
+					</div>
+				</Reveal>
 			</div>
 		</section>
 	);

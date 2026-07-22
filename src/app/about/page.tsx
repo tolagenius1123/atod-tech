@@ -19,7 +19,7 @@ export default function AboutPage() {
 		<main className="relative">
 			<Header />
 			<PageHero
-				title="The Team Behind Your Next Big Idea"
+				title="Discover Our Mission And Values In Digital Product Building"
 				description="We design and develop websites, mobile apps, and software that bring your ideas to life."
 				action={{ label: "Contact Us", href: "/contact" }}
 			/>

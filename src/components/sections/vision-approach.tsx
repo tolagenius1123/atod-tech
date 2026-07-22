@@ -1,6 +1,7 @@
+import Image from "next/image";
 import { MessageCircleQuestion, Search, type LucideIcon } from "lucide-react";
 
-import { ImagePlaceholder } from "@/components/shared/image-placeholder";
+import { visionIllustration } from "@/assets";
 import { RevealGroup, RevealItem } from "@/components/shared/reveal";
 import { SectionBadge } from "@/components/shared/section-badge";
 
@@ -35,9 +36,10 @@ export function VisionApproach() {
 				</RevealItem>
 
 				<RevealItem className="order-first lg:order-none">
-					<ImagePlaceholder
-						label="Product team at work"
-						className="h-131.75 w-full"
+					<Image
+						src={visionIllustration}
+						alt="Illustration of ideas flowing from an open mind"
+						className="mx-auto w-full max-w-83"
 					/>
 				</RevealItem>
 
