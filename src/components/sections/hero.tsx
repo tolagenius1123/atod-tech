@@ -18,6 +18,7 @@ import { FancyButton } from "@/components/shared/fancy-button";
 import { HeroBackdrop } from "@/components/shared/hero-backdrop";
 import { RevealGroup, RevealItem } from "@/components/shared/reveal";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 const trustedLogos = [
 	{ src: logoBoltshift, alt: "Boltshift", width: 113.6 },
@@ -123,7 +124,7 @@ export function Hero() {
 				className="relative mx-auto flex w-full max-w-360 flex-col items-center px-6 pb-10 md:pb-20 pt-33 xl:px-30"
 			>
 				<RevealItem>
-					<a
+					<Link
 						href="#projects"
 						className="fancy-shadow flex cursor-pointer flex-wrap items-center justify-center gap-y-1 rounded-[50px] py-1 pl-2 pr-4 transition-[filter] hover:brightness-125"
 					>
@@ -134,7 +135,7 @@ export function Hero() {
 							Check out our new products
 						</span>
 						<ArrowRight className="size-4 text-white" aria-hidden />
-					</a>
+					</Link>
 				</RevealItem>
 
 				<RevealItem>

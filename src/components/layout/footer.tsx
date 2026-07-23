@@ -81,7 +81,7 @@ export function Footer() {
 
 					{footerColumns.map((column) => (
 						<div key={column.heading} className="flex flex-col gap-8">
-							<h3 className="text-base font-semibold leading-[22px] text-brand">
+							<h3 className="text-base font-semibold leading-5.5 text-brand">
 								{column.heading}
 							</h3>
 							<ul className="flex flex-col gap-6">
@@ -89,7 +89,7 @@ export function Footer() {
 									<li key={link.label}>
 										<Link
 											href={link.href}
-											className="cursor-pointer text-base leading-[22px] text-white transition-colors hover:text-brand-accent"
+											className="cursor-pointer text-base leading-5.5 text-white transition-colors hover:text-brand-accent"
 										>
 											{link.label}
 										</Link>
@@ -100,8 +100,8 @@ export function Footer() {
 					))}
 				</div>
 
-				<div className="mt-12 flex h-15 items-center justify-center border-t border-[#e1e4ed]/40 py-6">
-					<p className="text-center text-sm leading-[22px] text-white/90 lg:text-base">
+				<div className="mt-12 flex h-15 items-center justify-center border-t border-[#e1e4ed]/40 py-12 md:py-6">
+					<p className="text-center text-sm leading-5.5 text-white/90 lg:text-base">
 						Copyright &copy; 2025 ATOD Tech Agency{" "}
 						<span className="text-[#d3d7e5]">|</span> All Rights Reserved{" "}
 						<span className="text-[#d3d7e5]">|</span>{" "}

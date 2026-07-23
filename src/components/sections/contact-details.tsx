@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import { ArrowRight, Mail, Phone, type LucideIcon } from "lucide-react";
 
@@ -8,11 +10,16 @@ import {
 	socialTwitter,
 	socialYoutube,
 } from "@/assets";
+import { FormField } from "@/components/form/form-field";
+import { LoadingButton } from "@/components/form/loading-button";
 import { RevealGroup, RevealItem } from "@/components/shared/reveal";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
+import Link from "next/link";
+import { useFormik } from "formik";
+import {
+	ContactUsSchema,
+	type ContactUsValues,
+} from "@/lib/validation-schemas";
+import { toast } from "sonner";
 
 const socialIcons = [
 	{ src: socialFacebook, label: "Facebook" },
@@ -22,7 +29,12 @@ const socialIcons = [
 	{ src: socialYoutube, label: "YouTube" },
 ];
 
-const formFields = [
+const formFields: Array<{
+	id: "name" | "email" | "phone" | "projectType";
+	label: string;
+	placeholder: string;
+	type: "text" | "email" | "tel";
+}> = [
 	{ id: "name", label: "Name", placeholder: "Lawal Halima", type: "text" },
 	{
 		id: "email",
@@ -44,6 +56,15 @@ const formFields = [
 	},
 ];
 
+const initialValues: ContactUsValues = {
+	name: "",
+	email: "",
+	phone: "",
+	projectType: "",
+	message: "",
+	company: "",
+};
+
 function ContactMethod({
 	icon: Icon,
 	label,
@@ -57,11 +78,11 @@ function ContactMethod({
 }) {
 	return (
 		<div className="flex items-center gap-4">
-			<span className="flex size-12 shrink-0 items-center justify-center rounded-lg bg-brand">
-				<Icon className="size-6 text-white" aria-hidden />
+			<span className="flex size-12 shrink-0 items-center justify-center rounded-sm border-2 border-brand bg-white">
+				<Icon className="size-6 text-brand" aria-hidden />
 			</span>
 			<div className="flex flex-col gap-1.5">
-				<span className="text-sm leading-none text-white/70">{label}</span>
+				<span className="text-sm leading-none text-white">{label}</span>
 				<a
 					href={href}
 					className="cursor-pointer text-base font-medium leading-none text-white transition-colors hover:text-brand-accent"
@@ -74,11 +95,41 @@ function ContactMethod({
 }
 
 export function ContactDetails() {
+	const formik = useFormik({
+		initialValues,
+		validationSchema: ContactUsSchema,
+		onSubmit: async (values, { setSubmitting, resetForm }) => {
+			try {
+				const response = await fetch("/api/contact", {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify(values),
+				});
+
+				const data = await response.json();
+
+				if (!response.ok) {
+					throw new Error(data.error || "Failed to send message");
+				}
+
+				toast.success("Message sent successfully! We'll get back to you soon.");
+				resetForm();
+			} catch (error) {
+				console.error("Error:", error);
+				toast.error("Something went wrong. Please try again.");
+			} finally {
+				setSubmitting(false);
+			}
+		},
+	});
+
 	return (
 		<RevealGroup
 			stagger={0.15}
 			amount={0.1}
-			className="mt-14 flex w-full max-w-[893px] flex-col gap-10 lg:mt-20 lg:flex-row lg:items-center lg:gap-16"
+			className="mt-14 flex w-full max-w-223.25 flex-col gap-10 lg:mt-20 lg:flex-row lg:items-center lg:gap-16 justify-between"
 		>
 			<RevealItem direction="right" className="flex flex-col">
 				<h2 className="text-lg font-semibold leading-tight text-white">
@@ -92,15 +143,15 @@ export function ContactDetails() {
 					<ContactMethod
 						icon={Mail}
 						label="Email:"
-						value="contact@Atod.com"
-						href="mailto:contact@Atod.com"
+						value="atodtech100@gmail.com"
+						href="mailto:atodtech100@gmail.com"
 					/>
-					<hr className="border-white/10" />
+					<hr className="border-white" />
 					<ContactMethod
 						icon={Phone}
 						label="Phone:"
-						value="+234 803 426 6076"
-						href="tel:+2348034266076"
+						value="+234 906 052 6791"
+						href="tel:+2349060526791"
 					/>
 				</div>
 
@@ -109,57 +160,75 @@ export function ContactDetails() {
 				</p>
 				<div className="mt-4 flex items-center gap-4">
 					{socialIcons.map((icon) => (
-						<a
+						<Link
 							key={icon.label}
-							href="#"
+							href=""
 							aria-label={icon.label}
 							className="cursor-pointer transition-opacity hover:opacity-70"
 						>
 							<Image src={icon.src} alt="" className="size-6" />
-						</a>
+						</Link>
 					))}
 				</div>
 			</RevealItem>
 
-			<RevealItem direction="left" className="w-full max-w-[523px]">
-				<form className="flex w-full flex-col gap-6 rounded-xl border border-white/10 bg-linear-to-b from-white/7 to-white/2 p-8 backdrop-blur-sm">
+			<RevealItem direction="left" className="w-full max-w-130.75">
+				<form
+					noValidate
+					onSubmit={formik.handleSubmit}
+					className="flex w-full flex-col gap-6 rounded-md border border-white/10 bg-transparent p-0 md:p-8"
+				>
+					<input
+						type="text"
+						name="company"
+						value={formik.values.company ?? ""}
+						onChange={formik.handleChange}
+						tabIndex={-1}
+						autoComplete="off"
+						aria-hidden="true"
+						className="sr-only"
+					/>
+
 					<div className="grid gap-6 sm:grid-cols-2">
 						{formFields.map((field) => (
-							<div key={field.id} className="flex flex-col gap-2">
-								<Label htmlFor={field.id} className="text-sm text-white">
-									{field.label}
-								</Label>
-								<Input
-									id={field.id}
-									name={field.id}
-									type={field.type}
-									placeholder={field.placeholder}
-									className="h-11.5 rounded-lg border-white/15 bg-white/5 text-white placeholder:text-white/40"
-								/>
-							</div>
+							<FormField
+								key={field.id}
+								id={field.id}
+								label={field.label}
+								placeholder={field.placeholder}
+								type={field.type}
+								value={formik.values[field.id]}
+								onChange={formik.handleChange}
+								onBlur={formik.handleBlur}
+								disabled={formik.isSubmitting}
+								error={
+									formik.touched[field.id] ? formik.errors[field.id] : undefined
+								}
+							/>
 						))}
 					</div>
 
-					<div className="flex flex-col gap-2">
-						<Label htmlFor="message" className="text-sm text-white">
-							Message
-						</Label>
-						<Textarea
-							id="message"
-							name="message"
-							rows={4}
-							placeholder="Type your message here.."
-							className="min-h-23 rounded-lg border-white/15 bg-white/5 text-white placeholder:text-white/40"
-						/>
-					</div>
+					<FormField
+						id="message"
+						label="Message"
+						type="textarea"
+						placeholder="Type your message here.."
+						value={formik.values.message}
+						onChange={formik.handleChange}
+						onBlur={formik.handleBlur}
+						disabled={formik.isSubmitting}
+						error={formik.touched.message ? formik.errors.message : undefined}
+					/>
 
-					<Button
+					<LoadingButton
 						type="submit"
-						className="fancy-gradient fancy-shadow h-10 w-fit cursor-pointer gap-2 rounded-[50px] border border-white px-8 text-sm font-normal tracking-[0.56px] text-white transition-[filter] hover:brightness-125"
+						loading={formik.isSubmitting}
+						loadingText="Sending..."
+						className="mt-5 fancy-gradient fancy-shadow h-10 w-fit gap-2 rounded-[50px] border border-white px-8 text-sm font-normal tracking-[0.56px] text-white transition-[filter] hover:brightness-125"
 					>
 						Send Message
 						<ArrowRight className="size-3" aria-hidden />
-					</Button>
+					</LoadingButton>
 				</form>
 			</RevealItem>
 		</RevealGroup>
