@@ -29,7 +29,7 @@ export const ContactUsSchema = yup.object().shape({
 		.min(10, "Message must be at least 10 characters")
 		.max(2000, "Message must be at most 2000 characters")
 		.required("Message is required"),
-	company: yup.string().notRequired(),
+	atodHpField: yup.string().notRequired(),
 });
 
 export type ContactUsValues = yup.InferType<typeof ContactUsSchema>;

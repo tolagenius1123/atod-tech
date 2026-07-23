@@ -13,7 +13,7 @@ function nl2br(value: string) {
 	return escapeHtml(value).replace(/\n/g, "<br />");
 }
 
-type ContactEmailFields = Omit<ContactUsValues, "company">;
+type ContactEmailFields = Omit<ContactUsValues, "atodHpField">;
 
 export function renderContactEmail({
 	name,

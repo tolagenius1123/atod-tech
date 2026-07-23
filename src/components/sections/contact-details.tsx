@@ -62,7 +62,7 @@ const initialValues: ContactUsValues = {
 	phone: "",
 	projectType: "",
 	message: "",
-	company: "",
+	atodHpField: "",
 };
 
 function ContactMethod({
@@ -180,12 +180,14 @@ export function ContactDetails() {
 				>
 					<input
 						type="text"
-						name="company"
-						value={formik.values.company ?? ""}
+						name="atodHpField"
+						value={formik.values.atodHpField ?? ""}
 						onChange={formik.handleChange}
 						tabIndex={-1}
 						autoComplete="off"
 						aria-hidden="true"
+						data-lpignore="true"
+						data-1p-ignore="true"
 						className="sr-only"
 					/>
 

@@ -30,7 +30,7 @@ export async function POST(request: Request) {
 		return NextResponse.json({ error: "Invalid form data" }, { status: 400 });
 	}
 
-	if (values.company) {
+	if (values.atodHpField) {
 		return NextResponse.json({ success: true });
 	}
 
